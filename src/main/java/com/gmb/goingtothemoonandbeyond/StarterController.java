@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class StarterController {
 
-
+    static String whereAmI;
 
     @FXML
     public ChoiceBox<String> Chooser;
@@ -44,7 +44,19 @@ public class StarterController {
             Chooser.getItems().addAll("Mercury", "Venus", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune");
             Chooser.getSelectionModel().select("Moon");
         }
+        whereAmI = "Starter";
     }
+    @FXML
+    void onStartClick(ActionEvent event) throws IOException {
+        whereAmI = Chooser.getSelectionModel().getSelectedItem();
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("planet.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    /*
     @FXML
     void onStartClick(ActionEvent event) throws IOException {
         if(Chooser.getSelectionModel().getSelectedItem().equals("Mercury")) {
@@ -145,6 +157,8 @@ public class StarterController {
             alert.showAndWait();
         }
     }
+    */
+
     @FXML
     void onRestart(ActionEvent event) throws IOException {
 
@@ -159,135 +173,7 @@ public class StarterController {
 
 
     }
-    @FXML
-    void onCheck(ActionEvent event) throws IOException {
 
-        if (Chooser.getSelectionModel().getSelectedItem().equals("Mercury")){
-            if(Integer.parseInt(oxygen.getText()) == 90 && Integer.parseInt(propellent.getText()) == 180 && Integer.parseInt(velocity.getText()) == 70){
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Venus")){
-            if(Integer.parseInt(oxygen.getText()) == 80 && Integer.parseInt(propellent.getText()) == 170 && Integer.parseInt(velocity.getText()) == 40){
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Moon")){
-            if(Integer.parseInt(oxygen.getText()) == 30 && Integer.parseInt(propellent.getText()) == 80 && Integer.parseInt(velocity.getText()) == 40){
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Mars")){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Jupiter")){
-            if(Integer.parseInt(oxygen.getText()) == 130 && Integer.parseInt(propellent.getText()) == 230 && Integer.parseInt(velocity.getText()) == 70){
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Saturn")){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Uranus")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-            if(Chooser.getSelectionModel().getSelectedItem().equals("Neptune")) {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ship_explosion")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-
-
-        }
 
 
     @FXML private final TableView<String> Data = new TableView<>();
