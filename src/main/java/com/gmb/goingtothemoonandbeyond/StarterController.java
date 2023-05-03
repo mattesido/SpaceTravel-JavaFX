@@ -2,6 +2,8 @@ package com.gmb.goingtothemoonandbeyond;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +36,10 @@ public class StarterController {
     public TextField propellent;
 
 
+
     @FXML
     public void initialize() {
-        if(Chooser != null) {
+        if (Chooser != null) {
             Chooser.getItems().removeAll(Chooser.getItems());
             Chooser.getItems().addAll("Mercury", "Venus", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune");
             Chooser.getSelectionModel().select("Moon");
@@ -159,7 +162,7 @@ public class StarterController {
     @FXML
     void onCheck(ActionEvent event) throws IOException {
 
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Mercury")){
+        if (Chooser.getSelectionModel().getSelectedItem().equals("Mercury")){
             if(Integer.parseInt(oxygen.getText()) == 90 && Integer.parseInt(propellent.getText()) == 180 && Integer.parseInt(velocity.getText()) == 70){
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("travelling.fxml")));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
