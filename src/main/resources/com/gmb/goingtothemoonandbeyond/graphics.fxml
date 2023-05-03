@@ -32,6 +32,6 @@
         </menus>
       </MenuBar>
       <Button fx:id="start" layoutX="225.0" layoutY="361.0" mnemonicParsing="false" onAction="#onStartClick" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: gREY;" text="START" />
-      <ChoiceBox fx:id="Chooser" layoutX="346.0" layoutY="2.0" onDragDetected="#onChoose" prefWidth="150.0" style="-fx-background-color: grey;" />
+      <ChoiceBox fx:id="Chooser" layoutX="346.0" layoutY="2.0" prefWidth="150.0" style="-fx-background-color: grey;" />
    </children>
 </AnchorPane>
