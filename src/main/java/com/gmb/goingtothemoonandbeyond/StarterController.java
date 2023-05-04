@@ -56,59 +56,7 @@ public class StarterController {
         stage.setScene(scene);
         stage.show();
     }
-    /*
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Mercury : 80 < propellent < 100, 150 < velocity < 200 and 50 < oxygen < 70");
-            alert.showAndWait();
-
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Venus : 70 < propellent < 90, 150 < velocity < 200 and 40 < oxygen < 50");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Moon :  20 < propellent < 40, 60 < velocity < 100 and 20 < oxygen < 40");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Mars : 50 < propellent < 60, 90 < velocity < 150 and 40 < oxygen < 50");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Jupiter : 100 < propellent < 150, 200 < velocity < 250 and 60 < oxygen < 80");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Saturn : 150 < propellent < 200, 250 < velocity < 300 and 80 < oxygen < 100");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Neptune : 250 < propellent < 300, 350 < velocity < 400 and 120 < oxygen < 140");
-            alert.showAndWait();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play ");
-            alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
-            alert.setContentText(" Uranus : 200 < propellent < 250, 300 < velocity < 350 and 100 < oxygen < 120");
-            alert.showAndWait();
-        }
-    }
-    */
 
     @FXML
     void onRestart(ActionEvent event) throws IOException {
