@@ -1,45 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouse" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gmb.goingtothemoonandbeyond.ShipController">
-   <children>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0" layoutX="102.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0" layoutX="196.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0" layoutX="307.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0" layoutX="408.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="asteroid" fitHeight="51.0" fitWidth="81.0" layoutX="519.0">
-         <image>
-            <Image url="@asteroid.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ship" fitHeight="87.0" fitWidth="48.0" layoutX="273.0" layoutY="311.0">
-         <image>
-            <Image url="@OIP.jpeg" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gmb.goingtothemoonandbeyond.BallsSettings" />
