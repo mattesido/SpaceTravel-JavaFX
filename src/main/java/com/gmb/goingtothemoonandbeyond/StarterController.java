@@ -57,99 +57,50 @@ public class StarterController {
         stage.show();
     }
     /*
-    @FXML
-    void onStartClick(ActionEvent event) throws IOException {
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Mercury")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MERCURY.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Mercury : 80 < propellent < 100, 150 < velocity < 200 and 50 < oxygen < 70");
             alert.showAndWait();
 
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Venus")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("VENUS.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Venus : 70 < propellent < 90, 150 < velocity < 200 and 40 < oxygen < 50");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Moon")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MOON.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Moon :  20 < propellent < 40, 60 < velocity < 100 and 20 < oxygen < 40");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Mars")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MARS.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Mars : 50 < propellent < 60, 90 < velocity < 150 and 40 < oxygen < 50");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Jupiter")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("JUPITER.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Jupiter : 100 < propellent < 150, 200 < velocity < 250 and 60 < oxygen < 80");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Saturn")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SATURN.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Saturn : 150 < propellent < 200, 250 < velocity < 300 and 80 < oxygen < 100");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Neptune")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("NEPTUNE.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
             alert.setContentText(" Neptune : 250 < propellent < 300, 350 < velocity < 400 and 120 < oxygen < 140");
             alert.showAndWait();
-        }
-        if(Chooser.getSelectionModel().getSelectedItem().equals("Uranus")) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("URANUS.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("How to play ");
             alert.setHeaderText(" PLANETS : HOW TO CORRECTLY SET UP THE SHIP");
