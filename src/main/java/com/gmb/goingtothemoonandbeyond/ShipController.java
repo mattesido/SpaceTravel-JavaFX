@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -46,14 +48,14 @@ public class ShipController {
         scene.setOnKeyPressed(event1 -> {
             switch (event1.getCode()) {
                 case SPACE -> shootShip();
-                case LEFT -> ship.getVelocity().x = -5;
-                case RIGHT -> ship.getVelocity().x = 5;
+                case LEFT, DOWN -> ship.getVelocity().x = -5;
+                case RIGHT, UP -> ship.getVelocity().x = 5;
                 case Q -> Platform.exit();
             }
         });
         scene.setOnKeyReleased(event1 -> {
             switch (event1.getCode()) {
-                case LEFT, RIGHT -> ship.getVelocity().x = 0;
+                case LEFT, RIGHT, UP, DOWN-> ship.getVelocity().x = 0;
             }
         });
 
@@ -68,7 +70,10 @@ public class ShipController {
         resources = new HashMap<>();
         resources.put("ship_missile", new Image(Objects.requireNonNull(getClass().getResourceAsStream("ship_missile.png")), 20, 30, false, true));
         resources.put("ship", new Image(Objects.requireNonNull(getClass().getResourceAsStream("ship.png")), 60, 60, false, true));
-        resources.put("alien", new Image(Objects.requireNonNull(getClass().getResourceAsStream("alien.png")), 50, 50, false, true));
+        resources.put("alienship", new Image(Objects.requireNonNull(getClass().getResourceAsStream("alienship.png")),
+                50,
+                50,
+                false, true));
     }
 
     private void shootShip() {
@@ -86,8 +91,9 @@ public class ShipController {
         // aliens
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 7; col++) {
-                ShipSprite alien = new ShipSprite(new ImageView(resources.get("alien")), new PVector(120 + 80 * col, 80 + 60 * row), new PVector(0.15, 0.05), "alien");
-                root.getChildren().add(alien);
+                ShipSprite alienship = new ShipSprite(new ImageView(resources.get("alienship")),
+                        new PVector(120 + 80 * col, 80 + 60 * row), new PVector(0.15, 0.05), "alienship");
+                root.getChildren().add(alienship);
             }
         }
     }
@@ -97,31 +103,35 @@ public class ShipController {
 
             @Override
             public void handle(long now) {
-                mainLoop();
+                try {
+                    mainLoop();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         timer.start();
     }
 
-    private void mainLoop() {
+    private void mainLoop() throws IOException {
         List<ShipSprite> sprites = sprites();
-        List<ShipSprite> aliens = sprites("alien");
+        List<ShipSprite> alienship = sprites("alienship");
         List<ShipSprite> alienMissiles = sprites("alien_missile");
         List<ShipSprite> shipMissiles = sprites("ship_missile");
         // one random alien shoots
         if (rnd.nextDouble() < 0.02) {
-            shooAlien(aliens.get(rnd.nextInt(aliens.size())));
+            shooAlien(alienship.get(rnd.nextInt(alienship.size())));
         }
-        // change aliens direction on the x-axis
+        // change alienship direction on the x-axis
         if (rnd.nextDouble() < 0.002) {
-            aliens.forEach(x -> x.getVelocity().x *= -1);
+            alienship.forEach(x -> x.getVelocity().x *= -1);
         }
         // missiles kill stuff
         alienMissiles.stream().filter(m -> m.intersects(ship)).forEach(m -> {
             m.setAlive(false);
             ship.setAlive(false);
         });
-        shipMissiles.forEach(m -> aliens.stream().filter(a -> a.intersects(m)).forEach(a -> {
+        shipMissiles.forEach(m -> alienship.stream().filter(a -> a.intersects(m)).forEach(a -> {
             m.setAlive(false);
             a.setAlive(false);
         }));
@@ -132,8 +142,15 @@ public class ShipController {
         root.getChildren().removeIf(s -> (s.getTranslateY() > root.getHeight()) || (s.getTranslateY() < 0));
         root.getChildren().removeIf(x -> (x instanceof ShipSprite) && (!((ShipSprite) x).isAlive()));
         // new game?
-        if (!ship.isAlive() || aliens.size() == 0)
+        if (!ship.isAlive() || alienship.size() == 0)
             initializeGameObjects();
+        if ( alienship.size() == 25){
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("victory.fxml")));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     private List<ShipSprite> sprites() {
