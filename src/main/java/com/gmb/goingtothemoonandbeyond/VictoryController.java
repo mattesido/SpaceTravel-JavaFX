@@ -6,13 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
+
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class VictoryController {
+    @FXML
+    private Label points;
     @FXML
     void onRestart(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("graphics.fxml")));
@@ -22,33 +25,41 @@ public class VictoryController {
         stage.show();
     }
     @FXML
-    void onPoints(ActionEvent event) {
-int  point = 0;
+    void onClickPoints(ActionEvent event) {
+
         if (StarterController.whereAmI.equals("Mercury")){
-            point += 40;
+            points.setVisible(true);
+            points.setText("40");
 
             
         }
         if (StarterController.whereAmI.equals("Venus")){
-            point += 30;
+            points.setVisible(true);
+            points.setText("30");
         }
         if (StarterController.whereAmI.equals("Mars")){
-            point += 20;
+            points.setVisible(true);
+            points.setText("20");
         }
         if (StarterController.whereAmI.equals("Moon")){
-            point += 10;
+            points.setVisible(true);
+            points.setText("10");
         }
         if (StarterController.whereAmI.equals("Jupiter")){
-            point += 50;
+            points.setVisible(true);
+            points.setText("50");
         }
         if (StarterController.whereAmI.equals("Saturn")){
-            point += 60;
+            points.setVisible(true);
+            points.setText("60");
         }
         if (StarterController.whereAmI.equals("Uranus")){
-            point += 70;
+            points.setVisible(true);
+            points.setText("70");
         }
         if (StarterController.whereAmI.equals("Neptune")){
-            point += 80;
+            points.setVisible(true);
+            points.setText("80");
         }
 
     }

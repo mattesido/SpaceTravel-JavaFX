@@ -7,10 +7,7 @@ public class ShipSprite extends Sprite {
     boolean isAlive = true;
     String description;
 
-    public ShipSprite(Node view, String description) {
-        super(view);
-        this.description = description;
-    }
+
 
     public ShipSprite(Node view, PVector location, String description) {
         super(view, location);
@@ -22,15 +19,11 @@ public class ShipSprite extends Sprite {
         this.description = description;
     }
 
-    public ShipSprite(Node view, PVector location, PVector velocity, PVector acceleration, String description) {
-        super(view, location, velocity, acceleration);
-        this.description = description;
-    }
 
-    public ShipSprite(Node view, PVector location, PVector velocity, PVector acceleration, double mass, String description) {
-        super(view, location, velocity, acceleration, mass);
-        this.description = description;
-    }
+
+
+
+
 
     public boolean isAlive() {
         return isAlive;
@@ -44,8 +37,6 @@ public class ShipSprite extends Sprite {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+
 }
 

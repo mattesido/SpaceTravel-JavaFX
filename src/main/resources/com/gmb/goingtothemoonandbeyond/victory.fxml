@@ -2,22 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Grey;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gmb.goingtothemoonandbeyond.VictoryController">
-   <children>
-      <ImageView fitHeight="414.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@landed.jpeg" />
-         </image>
-      </ImageView>
-      <ButtonBar layoutX="143.0" layoutY="346.0" prefHeight="40.0" prefWidth="260.0">
-        <buttons>
-          <Button mnemonicParsing="false" onAction="#onPoints" text="ShowPoints" />
-            <Button mnemonicParsing="false" onAction="#onRestart" prefHeight="26.0" prefWidth="174.0" text="Restart" />
-        </buttons>
-      </ButtonBar>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Grey;" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gmb.goingtothemoonandbeyond.VictoryController">
+    <ImageView fitHeight="414.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@landed.jpeg"/>
+    </ImageView>
+    <ButtonBar layoutX="143.0" layoutY="346.0" prefHeight="40.0" prefWidth="260.0">
+      <buttons>
+          <Button mnemonicParsing="false" onAction="#onClickPoints" text="ShowPoints"/>
+          <Label fx:id="points" visible="false"/>
+          <Button mnemonicParsing="false" onAction="#onRestart" prefHeight="26.0" prefWidth="233.0" text="Restart"/>
+      </buttons>
+    </ButtonBar>
 </AnchorPane>
