@@ -2,163 +2,196 @@ package com.gmb.goingtothemoonandbeyond;
 
 import javafx.animation.AnimationTimer;
 
-import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
-import javafx.scene.layout.Pane;
+
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.random.RandomGenerator;
-import java.util.stream.Collectors;
 
 public class ShipController {
-    static RandomGenerator rnd = RandomGenerator.getDefault();
-    @FXML
-    private Pane root1;
-    AnimationTimer timer;
-    HashMap<String, Image> resources;
-    ShipSprite ship;
 
 
+
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
+int score;
     @FXML
     void onStartClick(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        loadResources();
-        root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game.fxml")));
-        Scene scene = new Scene(root1);
-        scene.setOnKeyPressed(event1 -> {
-            switch (event1.getCode()) {
 
-                case LEFT -> ship.getVelocity().x = -5;
-                case RIGHT -> ship.getVelocity().x = 5;
-                case UP -> ship.getVelocity().y = -5;
-                case DOWN -> ship.getVelocity().y= 5;
-                case Q -> Platform.exit();
-            }
-        });
-        scene.setOnKeyReleased(event1 -> {
-            switch (event1.getCode()) {
-                case LEFT, RIGHT, UP, DOWN-> ship.getVelocity().x = 0;
-            }
-        });
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        Scene mainScene = new Scene(root);
+        stage.setScene(mainScene);
 
-        stage.setScene(scene);
-        stage.setResizable(true);
-        stage.show();
-        initializeGameObjects();
-        initializeTimer();
-    }
+        Canvas canvas = new Canvas(WIDTH, HEIGHT);
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        root.setCenter(canvas);
 
-    private void loadResources() {
-        resources = new HashMap<>();
-        resources.put("ship", new Image(Objects.requireNonNull(getClass().getResourceAsStream("ship.png")), 60, 60, false, true));
-
-    }
+        context.setFill(Color.BLUE);
+        context.fillRect(0,0, WIDTH, HEIGHT);
 
 
 
-    private void initializeGameObjects() {
-        // remove all sprites
-        root1.getChildren().removeIf(x -> (x instanceof ShipSprite));
-        // ship
-        ship = new ShipSprite(new ImageView(resources.get("ship")), new PVector(400, 400), "ship");
-        root1.getChildren().add(ship);
-        // aliens
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 7; col++) {
-                ShipSprite alienship = new ShipSprite(new ImageView(resources.get("alienship")),
-                        new PVector(120 + 80 * col, 80 + 60 * row), new PVector(0.15, 0.05), "alienship");
-                root1.getChildren().add(alienship);
-            }
-        }
-    }
+        // handles continuous inputs (as long as key is pressed)
+        ArrayList<String> keyPressedList = new ArrayList<>();
 
-    private void initializeTimer() {
-        timer = new AnimationTimer() {
+        // handles discrete inputs (one per key press)
+        ArrayList<String> keyJustPressedList = new ArrayList<>();
 
-            @Override
-            public void handle(long now) {
-                try {
-                    mainLoop();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        mainScene.setOnKeyPressed(
+                (KeyEvent event1) -> {
+                    String keyName = event1.getCode().toString();
+                    //avoid adding duplicates to list
+                    if (!keyPressedList.contains(keyName)) {
+                        keyPressedList.add(keyName);
+                        keyJustPressedList.add(keyName);
+                    }
                 }
+        );
+
+        mainScene.setOnKeyReleased(
+                (KeyEvent event1) -> {
+                    String keyName = event1.getCode().toString();
+                    if (keyPressedList.contains(keyName)) {
+                        keyPressedList.remove(keyName);
+                    }
+                }
+        );
+
+        Sprite background = new Sprite("com/gmb/goingtothemoonandbeyond/space.png");
+        background.position.set(400,300);
+
+        Sprite spaceShip = new Sprite("com/gmb/goingtothemoonandbeyond/spaceship.png");
+        spaceShip.position.set(100,300);
+
+        ArrayList<Sprite> laserList = new ArrayList<>();
+        ArrayList<Sprite> asteroidList = new ArrayList<>();
+
+        int asteroidCount = 6;
+        for (int n = 0; n < asteroidCount; n++) {
+            Sprite asteroid = new Sprite("com/gmb/goingtothemoonandbeyond/asteroid.png");
+            double x = 500 * Math.random() + 300; // 300-800
+            double y = 400 * Math.random() + 100; // 100-500
+            asteroid.position.set(x,y);
+            double angle = 360 * Math.random();
+            asteroid.velocity.setLength(50);
+            asteroid.velocity.setAngleInDegrees(angle);
+            asteroidList.add(asteroid);
+        }
+
+        score = 0;
+        AnimationTimer gameLoop = new AnimationTimer() {
+            @Override
+            public void handle(long nanoTime) {
+                // process user input
+                if (keyPressedList.contains("LEFT")) {
+                    spaceShip.rotationInDegrees -= 3;
+                }
+
+                if (keyPressedList.contains("RIGHT")) {
+                    spaceShip.rotationInDegrees += 3;
+                }
+
+                if (keyPressedList.contains("UP")) {
+                    spaceShip.velocity.setLength(150);
+                    spaceShip.velocity.setAngleInDegrees(spaceShip.rotationInDegrees);
+                } else {
+                    spaceShip.velocity.setLength(0);
+                }
+
+                if (keyJustPressedList.contains("SPACE")) {
+                    Sprite laser = new Sprite("com/gmb/goingtothemoonandbeyond/laser.png");
+                    laser.position.set(spaceShip.position.x, spaceShip.position.y);
+                    laser.velocity.setLength(400);
+                    laser.velocity.setAngleInDegrees(spaceShip.rotationInDegrees);
+                    laserList.add(laser);
+                }
+
+                //after processing user input, clear the just pressed list
+                keyJustPressedList.clear();
+
+                spaceShip.update(1/60.0);
+
+                for (Sprite asteroid : asteroidList) {
+                    asteroid.update(1/60.0);
+                }
+
+                // update lasers; destroy if 2 seconds passed
+                for (int n=0; n <laserList.size(); n++) {
+                    Sprite laser = laserList.get(n);
+                    laser.update(1/60.0);
+                    if (laser.elapseTimeSeconds > 2) {
+                        laserList.remove(n);
+                    }
+                }
+
+                // when laser overlaps asteroid, remove both
+                for (int laserNum = 0; laserNum < laserList.size(); laserNum++) {
+                    Sprite laser = laserList.get(laserNum);
+                    for (int asteroidNum = 0; asteroidNum < asteroidList.size(); asteroidNum++) {
+                        Sprite asteroid = asteroidList.get(asteroidNum);
+                        if (laser.overlaps(asteroid)) {
+                            laserList.remove(laserNum);
+                            asteroidList.remove(asteroidNum);
+                            score += 100;
+                        }
+                    }
+                }
+
+                background.render(context);
+                spaceShip.render(context);
+                for (Sprite laser : laserList) {
+                    laser.render(context);
+                }
+                for (Sprite asteroid : asteroidList) {
+                    asteroid.render(context);
+                }
+
+                // draw score on screen
+                context.setFill(Color.WHITE);
+                context.setStroke(Color.GREEN);
+                context.setFont(new Font("Arial Black", 48));
+                context.setLineWidth(3);
+                String text = "Score: " + score;
+                int textX = 500;
+                int textY = 50;
+                context.fillText(text, textX, textY);
+                context.strokeText(text, textX, textY);
             }
         };
-        timer.start();
-    }
-
-    private void mainLoop() throws IOException {
-        List<ShipSprite> sprites = sprites();
-        List<ShipSprite> alienship = sprites("alienship");
-        List<ShipSprite> alienMissiles = sprites("alien_missile");
-        List<ShipSprite> shipMissiles = sprites("ship_missile");
-        // one random alien shoots
-        if (rnd.nextDouble() < 0.02) {
-            shooAlien(alienship.get(rnd.nextInt(alienship.size())));
-        }
-        // change alienship direction on the x-axis
-        if (rnd.nextDouble() < 0.002) {
-            alienship.forEach(x -> x.getVelocity().x *= -1);
-        }
-        // missiles kill stuff
-        alienMissiles.stream().filter(m -> m.intersects(ship)).forEach(m -> {
-            m.setAlive(false);
-            ship.setAlive(false);
-        });
-        shipMissiles.forEach(m -> alienship.stream().filter(a -> a.intersects(m)).forEach(a -> {
-            m.setAlive(false);
-            a.setAlive(false);
-        }));
-        // updates sprites
-        sprites.forEach(Sprite::update);
-        sprites.forEach(Sprite::display);
-        // remove all references of out-of-screen nodes and dead entities
-        root1.getChildren().removeIf(s -> (s.getTranslateY() > root1.getHeight()) || (s.getTranslateY() < 0));
-        root1.getChildren().removeIf(x -> (x instanceof ShipSprite) && (!((ShipSprite) x).isAlive()));
-        // new game?
-        if (!ship.isAlive() || alienship.size() == 0)
-            initializeGameObjects();
-        if (ship.isAlive()){
-            Parent root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("victory.fxml")));
-            Scene scene = new Scene(root1);
-            Stage stage = new Stage();
+        if(score == 500){
+            gameLoop.stop();
+            stage.close();
+            Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("planet.fxml")));
+            Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            timer.stop();
-
         }
-    }
 
-
-    private List<ShipSprite> sprites() {
-        return root1.getChildren().stream().filter(x -> x instanceof ShipSprite).map(x -> (ShipSprite) x).collect(Collectors.toList());
+        gameLoop.start();
+        stage.show();
     }
-
-    private List<ShipSprite> sprites(String description) {
-        return root1.getChildren().stream().filter(x -> x instanceof ShipSprite).map(x -> (ShipSprite) x).filter(x -> x.getDescription().equals(description)).collect(Collectors.toList());
-    }
-
-    private void shooAlien(ShipSprite alien) {
-        PVector location = new PVector(alien.getTranslateX() + 15, alien.getTranslateY() + 50);
-        PVector velocity = new PVector(0, 5);
-        root1.getChildren().add(new ShipSprite(new Circle(10, Color.WHITE), location, velocity, "alien_missile"));
-    }
+        
 }
 
